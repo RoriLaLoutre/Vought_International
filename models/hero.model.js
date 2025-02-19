@@ -1,7 +1,11 @@
 import sequelize from "../config/database.js";
 import { DataTypes } from "sequelize";
+import Power from "./power.model.js";
+import Mission from "./mission.model.js";
+import HeroPower from "./heroPower.model.js";
+import HeroMission from "./HeroMission.js";
 
-const Hero = sequelize.define("heroes", { id: {
+const Hero = sequelize.define("heroes", { id_hero: {
   // type: DataTypes.UUIDV4,
   primaryKey: true,
   // defaultValue: DataTypes.UUIDV4,
@@ -11,7 +15,7 @@ const Hero = sequelize.define("heroes", { id: {
 alias: {
   type: DataTypes.STRING,
   allowNull: false,
-  // unique: true
+  unique: true
 },
 identity: {
   type: DataTypes.STRING,
@@ -40,5 +44,8 @@ isDeleted: {
     withDeleted: {},
   }
 });
+
+Hero.belongsToMany(Power, { through: HeroPower, foreignKey: "id_hero", as: "powers" });
+Hero.belongsToMany(Mission, { through: HeroMission, foreignKey: "id_hero", as: "missions" });
 
 export default Hero;
