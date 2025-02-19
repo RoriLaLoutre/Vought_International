@@ -3,10 +3,10 @@ import { DataTypes } from "sequelize";
 import Hero from "./hero.model.js";
 import HeroPower from "./heroPower.model.js";
 
+
 const Power = sequelize.define("powers", { id_pouvoir: {
-  // type: DataTypes.UUIDV4,
+  type: DataTypes.UUIDV4,
   primaryKey: true,
-  // defaultValue: DataTypes.UUIDV4,
   type: DataTypes.INTEGER,
   autoIncrement: true
 },

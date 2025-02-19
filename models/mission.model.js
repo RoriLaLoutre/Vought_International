@@ -5,7 +5,7 @@ import HeroMission from "./heroMission.model.js";
 
 const Mission = sequelize.define("missions", {
   id_mission: {
-    // type: DataTypes.INTEGER,
+    type: DataTypes.INTEGER,
     autoIncrement: true,
     primaryKey: true,
   },
@@ -22,6 +22,7 @@ const Mission = sequelize.define("missions", {
     type: DataTypes.ENUM("en cours", "terminée", "en pause"),
     allowNull: false,
   },
+  
   is_a_success: {
     type: DataTypes.BOOLEAN,
     allowNull: false,
