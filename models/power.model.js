@@ -2,9 +2,7 @@ import sequelize from "../config/database.js";
 import { DataTypes } from "sequelize";
 
 const Power = sequelize.define("powers", { id: {
-  // type: DataTypes.UUIDV4,
   primaryKey: true,
-  // defaultValue: DataTypes.UUIDV4,
   type: DataTypes.INTEGER,
   autoIncrement: true
 },

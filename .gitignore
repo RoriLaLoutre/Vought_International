@@ -116,6 +116,8 @@ dist
 # FuseBox cache
 .fusebox/
 
+database.sqlite3
+
 # DynamoDB Local files
 .dynamodb/
 

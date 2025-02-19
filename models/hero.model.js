@@ -11,7 +11,7 @@ const Hero = sequelize.define("heroes", { id: {
 alias: {
   type: DataTypes.STRING,
   allowNull: false,
-  // unique: true
+  unique: true
 },
 identity: {
   type: DataTypes.STRING,
