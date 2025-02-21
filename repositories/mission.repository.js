@@ -29,7 +29,7 @@ export async function getAllMissionsByStatus(status) {
     const missions = await Mission.findAll({where : {status}})
     return missions
 }
-export async function getAllMissionsByStatus(is_a_success) {
+export async function getAllMissionsBySuccess(is_a_success) {
     // param is_a_success is Boolean
     const missions = await Mission.findAll({where : {is_a_success}})
     return missions
@@ -50,12 +50,12 @@ export async function updateMission(id, values) {
 }
 
 // DELETE (SOFT DELETE)
-export async function getDeletedMissionById(id) {
+export async function deletedMissionById(id) {
     return await Mission.scope("deleted").findByPk(id) || null;
 }
 
 export async function restoreMission(id) {
-    const deletedMission = await getDeletedMissionById(id);
+    const deletedMission = await deletedMissionById(id);
     
     if (!deletedMission || await missionExists(deletedMission.id)) {
         return null;
