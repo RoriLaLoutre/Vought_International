@@ -85,9 +85,7 @@ export async function createMission({ nom_mission, description, status, is_a_suc
     throw new HeroError.ConflictError("La mission à déja été crée (nom_mission).");  
   }
 
-  if (typeof status !== 'boolean') {
-    throw new HeroError.BadRequestError("Le statut de la mission doit être un booléen.");
-  }
+  
 
   if (typeof is_a_success !== 'boolean') {
     throw new HeroError.BadRequestError("La réussite de la mission doit être un booléen.");
