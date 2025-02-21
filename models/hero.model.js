@@ -3,7 +3,7 @@ import { DataTypes } from "sequelize";
 import Power from "./power.model.js";
 import Mission from "./mission.model.js";
 import HeroPower from "./heroPower.model.js";
-import HeroMission from "./HeroMission.js";
+import HeroMission from "./heroMission.model.js";
 
 const Hero = sequelize.define("heroes", { id_hero: {
   // type: DataTypes.UUIDV4,
