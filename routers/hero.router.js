@@ -1,8 +1,10 @@
 import express from "express";
 import { HeroController } from "../controllers/index.controller.js";
+import { MissionController } from "../controllers/index.controller.js";
 
 const router = express.Router()
 
+router.get("/mission", MissionController.getAllMissions);
 router.get("/", HeroController.getAllHeroes);
 router.get("/:id", HeroController.getHeroById);
 router.post("/", HeroController.createHero);
