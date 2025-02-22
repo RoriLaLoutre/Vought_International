@@ -4,6 +4,9 @@ import router from "./routers/hero.router.js";
 import { logMiddleware } from "./middlewares/log.middlewares.js";
 import { errorHandler } from "./middlewares/error.middlewares.js";
 import { initializeHeroMock } from "./services/mock.service.js";
+import { associate } from "./models/index.model.js";
+
+associate();
 
 await sequelize.sync({ force: true });
 console.log("Base de donnée synchronisée !");

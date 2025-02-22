@@ -39,6 +39,5 @@ isDeleted: {
   }
 });
 
-Power.belongsToMany(Hero, { through: HeroPower, foreignKey: "id_pouvoir", as: "heroes" });
 
 export default Power;

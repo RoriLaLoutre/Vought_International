@@ -45,7 +45,4 @@ isDeleted: {
   }
 });
 
-Hero.belongsToMany(Power, { through: HeroPower, foreignKey: "id_hero", as: "powers" });
-Hero.belongsToMany(Mission, { through: HeroMission, foreignKey: "id_hero", as: "missions" });
-
 export default Hero;
