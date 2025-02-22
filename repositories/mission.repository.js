@@ -16,7 +16,6 @@ export async function getMissionById(id) {
 }
 
 export async function getMissionByName(nom_mission) {
-    // param nom_mission is String
     const mission = await Mission.findOne({where : {nom_mission}})
     if (!mission){
         return null
@@ -25,12 +24,10 @@ export async function getMissionByName(nom_mission) {
 }
 
 export async function getAllMissionsByStatus(status) {
-    // param status is Boolean
     const missions = await Mission.findAll({where : {status}})
     return missions
 }
 export async function getAllMissionsBySuccess(is_a_success) {
-    // param is_a_success is Boolean
     const missions = await Mission.findAll({where : {is_a_success}})
     return missions
 }
