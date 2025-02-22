@@ -57,7 +57,7 @@ export async function getMissionByName(req, res , next) {
 export async function createMission(req, res , next) {
   try {
     const { nom_mission, description, status, is_a_success} = req.body;
-    const newMission = await HeroService.createHero({ 
+    const newMission = await MissionService.createMission({ 
         nom_mission,
         description,
         status, 
