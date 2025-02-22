@@ -77,8 +77,8 @@ export async function getAllMissions() {
 }
 
 export async function createMission({ nom_mission, description, status, is_a_success}) {
-  if (!nom_mission || nom_mission.length < 3 || !/^[a-zA-Z ]+$/.test(nom_mission)) {
-    throw new HeroError.BadRequestError("Le nom de la mission est non valide (3 caractères min, et aps de caractère spéciaux )");
+  if (!nom_mission || nom_mission.length < 3 || !/^[a-zA-ZÀ-ÿ\s_-]+$/.test(nom_mission)) {
+    throw new HeroError.BadRequestError("Le nom de la mission est non valide (3 caractères min, et pas de caractère spéciaux )");
   }
 
   if (await MissionRepository.missionExists(nom_mission)) {
