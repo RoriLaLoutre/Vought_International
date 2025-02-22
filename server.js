@@ -5,6 +5,7 @@ import { logMiddleware } from "./middlewares/log.middlewares.js";
 import { errorHandler } from "./middlewares/error.middlewares.js";
 import { initializeHeroMock } from "./services/mock.service.js";
 import { associate } from "./models/index.model.js";
+import cors from "cors";
 
 associate();
 
@@ -14,7 +15,7 @@ console.log("Base de donnée synchronisée !");
 await initializeHeroMock();
 
 const app = express();
-
+app.use(cors());
 app.use(express.json());
 app.use(logMiddleware);
 
