@@ -1,16 +1,16 @@
 import * as PowerRepository from "../repositories/power.repository.js";
 import { PowerError } from "../errors/index.error.js";
 
-export async function createPower({ nom_power, description_pouvoir }) {
-  if (!nom_power || nom_power.length < 3 || !/^[a-zA-Z ]+$/.test(nom_power)) {
-    throw new PowerError.BadRequestError("Le nom du pouvoir doit comporter au moins 3 caractères et ne doit contenir que des lettres et des espaces.");
+export async function createPower({ nom_pouvoir, description_pouvoir }) {
+  if (!nom_pouvoir || nom_pouvoir.length < 3) {
+    throw new PowerError.BadRequestError("Le nom du pouvoir doit comporter au moins 3 caractères.");
   }
 
-  if (await PowerRepository.powerExists(nom_power)) {
+  if (await PowerRepository.powerExists(nom_pouvoir)) {
     throw new PowerError.ConflictError("Le pouvoir existe déjà.");
   }
 
-  const power = await PowerRepository.createPower({ nom_power, description_pouvoir });
+  const power = await PowerRepository.createPower({ nom_pouvoir, description_pouvoir });
   return power.dataValues;
 }
 
@@ -69,7 +69,7 @@ export async function getAllPowersWithDeleted() {
   return powers;
 }
 
-export async function getAllPowersDeleted() {
-  const powers = await PowerRepository.getAllPowersDeleted();
+export async function getAllDeletedPowers() {
+  const powers = await PowerRepository.getAllDeletedPowers();
   return powers;
 }
