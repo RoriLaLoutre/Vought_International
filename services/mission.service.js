@@ -37,32 +37,46 @@ export async function getMissionByName(nom_mission) {
 export async function getAllMissionsByStatus(status) {
     const missions = await MissionRepository.getAllMissionsByStatus(status);
 
-    if (!missions) {
-        throw new HeroError.NotFoundError(`Aucune mission a pour statue ${status}`); // fait
+    if (!missions || missions.length === 0) {
+        throw new HeroError.NotFoundError(`Aucune mission a pour status ${status}`); // fait
     }
-    return{
-        id: missions.id,
-        nom_mission: missions.nom_mission,
-        status: missions.status,
-    }
+    const formattedMissions = missions.map(mission => {
+      return {
+        id: mission.id,
+        nom_mission: mission.nom_mission,
+        description: mission.description,
+        status: mission.status,
+        is_a_success: mission.is_a_success,
+      }
+    })
+  
+    return formattedMissions;
 }
 
 export async function getAllMissionsBySuccess(is_a_success) {
     const missions = await MissionRepository.getAllMissionsBySuccess(is_a_success);
 
-    if (!missions) {
+    if (!missions || missions.length === 0) {
         throw new HeroError.NotFoundError(`Aucune mission a pour success ${is_a_success}`); // fait
     }
-    return{
-        id: missions.id,
-        nom_mission: missions.nom_mission,
-        status: missions.is_a_success,
-    }
+    const formattedMissions = missions.map(mission => {
+      return {
+        id: mission.id,
+        nom_mission: mission.nom_mission,
+        description: mission.description,
+        status: mission.status,
+        is_a_success: mission.is_a_success,
+      }
+    })
+  
+    return formattedMissions;
 }
 
 export async function getAllMissions() {
   const missions = await MissionRepository.getAllMissions();
-
+  if (!missions || missions.length === 0) {
+    throw new HeroError.NotFoundError(`Aucune mission trouvée`); // fait
+  }
   const formattedMissions = missions.map(mission => {
     return {
       id: mission.id,
@@ -84,8 +98,6 @@ export async function createMission({ nom_mission, description, status, is_a_suc
   if (await MissionRepository.missionExists(nom_mission)) {
     throw new HeroError.ConflictError("La mission à déja été crée (nom_mission).");  
   }
-
-  
 
   if (typeof is_a_success !== 'boolean') {
     throw new HeroError.BadRequestError("La réussite de la mission doit être un booléen.");

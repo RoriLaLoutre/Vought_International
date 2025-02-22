@@ -11,10 +11,43 @@ export async function getAllMissions(req, res , next) {
   }
 }
 
+export async function getAllMissionsByStatus(req, res , next) {
+  const status = req.params.status;
+  try {
+    const missions = await MissionService.getAllMissionsByStatus();
+    res.json(missions);
+    // res.send("<h1>Liste des missions: </h1>" + JSON.stringify(missions))
+  } catch (error) {
+    next(error)
+  }
+}
+
+export async function getAllMissionsBySuccess(req, res , next) {
+  const is_a_success = req.params.is_a_success;
+  try {
+    const missions = await MissionService.getAllMissionsBySuccess();
+    res.json(missions);
+  } catch (error) {
+    next(error)
+  }
+}
+
+
+
 export async function getMissionById(req, res , next) {
   try {
     const id = req.params.id;
     const mission = await MissionService.getMissionById(id);
+    res.json(mission);
+  } catch (error) {
+    next(error)
+  }
+}
+
+export async function getMissionByName(req, res , next) {
+  try {
+    const name = req.params.nom_mission;
+    const mission = await MissionService.getMissionByName(name);
     res.json(mission);
   } catch (error) {
     next(error)
