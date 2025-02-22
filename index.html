@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Créer un Héros, une Mission ou un Pouvoir</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        form { max-width: 400px; padding: 20px; border: 1px solid #ccc; }
+        label { display: block; margin-top: 10px; }
+        input, select, textarea { width: 100%; padding: 8px; margin-top: 5px; }
+        button { margin-top: 10px; padding: 10px; background: blue; color: white; border: none; }
+    </style>
+</head>
+<body>
+
+    <h1>Ajouter un Héros, une Mission ou un Pouvoir</h1>
+
+    <label for="type">Choisir un type :</label>
+    <select id="type">
+        <option value="hero">Héros</option>
+        <option value="mission">Mission</option>
+        <option value="power">Pouvoir</option>
+    </select>
+
+    <form id="form">
+        <!-- Champs pour Héros -->
+        <div id="hero-fields">
+            <label for="alias">Alias :</label>
+            <input type="text" id="alias" name="alias" required>
+            
+            <label for="identity">Identité :</label>
+            <input type="text" id="identity" name="identity" required>
+
+            <label for="powerDate">Date de pouvoir :</label>
+            <input type="date" id="powerDate" name="powerDate" required>
+        </div>
+
+        <!-- Champs pour Mission -->
+        <div id="mission-fields" style="display: none;">
+            <label for="nom_mission">Nom de la mission :</label>
+            <input type="text" id="nom_mission" name="nom_mission" required>
+            
+            <label for="description">Description :</label>
+            <textarea id="description" name="description" required></textarea>
+
+            <label for="status">Statut :</label>
+            <select id="status" name="status">
+                <option value="en cours">En cours</option>
+                <option value="terminée">Terminée</option>
+                <option value="en pause">En pause</option>
+            </select>
+
+            <label>
+                Succès :
+                <input type="checkbox" id="is_a_success" name="is_a_success">
+            </label>
+        </div>
+
+        <!-- Champs pour Pouvoir -->
+        <div id="power-fields" style="display: none;">
+            <label for="nom_pouvoir">Nom du pouvoir :</label>
+            <input type="text" id="nom_pouvoir" name="nom_pouvoir" required>
+
+            <label for="description_pouvoir">Description :</label>
+            <textarea id="description_pouvoir" name="description_pouvoir" required></textarea>
+        </div>
+
+        <button type="submit">Créer</button>
+    </form>
+
+    <script>
+        document.getElementById("type").addEventListener("change", function () {
+            document.getElementById("hero-fields").style.display = this.value === "hero" ? "block" : "none";
+            document.getElementById("mission-fields").style.display = this.value === "mission" ? "block" : "none";
+            document.getElementById("power-fields").style.display = this.value === "power" ? "block" : "none";
+        });
+
+        document.getElementById("form").addEventListener("submit", async function (event) {
+            event.preventDefault();
+            
+            let type = document.getElementById("type").value;
+            let url = "";
+            let data = {};
+
+            if (type === "hero") {
+                url = "http://localhost:3000/api/v1/heroes";
+                data = {
+                    alias: document.getElementById("alias").value,
+                    identity: document.getElementById("identity").value,
+                    powerDate: document.getElementById("powerDate").value,
+                };
+            } else if (type === "mission") {
+                url = "http://localhost:3000/api/v1/heroes/mission";
+                data = {
+                    nom_mission: document.getElementById("nom_mission").value,
+                    description: document.getElementById("description").value,
+                    status: document.getElementById("status").value,
+                    is_a_success: document.getElementById("is_a_success").checked,
+                };
+            } else if (type === "power") {
+                url = "http://localhost:3000/api/v1/heroes/powers";
+                data = {
+                    nom_pouvoir: document.getElementById("nom_pouvoir").value,
+                    description_pouvoir: document.getElementById("description_pouvoir").value,
+                };
+            }
+
+            try {
+                const response = await fetch(url, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(data),
+                });
+
+                if (response.ok) {
+                    alert(type.charAt(0).toUpperCase() + type.slice(1) + " ajouté avec succès !");
+                    document.getElementById("form").reset();
+                } else {
+                    alert("Erreur lors de l'ajout !");
+                }
+            } catch (error) {
+                alert("Erreur de connexion au serveur.");
+            }
+        });
+    </script>
+
+</body>
+</html>
