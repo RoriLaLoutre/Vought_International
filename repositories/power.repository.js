@@ -1,7 +1,7 @@
 import Power from "../models/power.model.js";
 
-export async function createPower({ nom_power , description_pouvoir }) {
-  const power = await Power.create({ nom_power , description_pouvoir });
+export async function createPower({ nom_pouvoir , description_pouvoir }) {
+  const power = await Power.create({ nom_pouvoir , description_pouvoir });
   return power;
 }
 
@@ -14,8 +14,8 @@ export async function getPowerById(id) {
   return power;
 }
 
-export async function getPowerByName(nom_power){
-    const power = await Power.findOne({ where: { nom_power } });
+export async function getPowerByName(nom_pouvoir){
+    const power = await Power.findOne({ where: { nom_pouvoir } });
     if (!power) {
         return null;
       }
@@ -54,13 +54,13 @@ export async function getAllPowers() {
   return await Power.findAll();
 }
 
-export async function powerExists(nom_power) {
-  const power = await Power.findOne({ where: { nom_power } });
+export async function powerExists(nom_pouvoir) {
+  const power = await Power.findOne({ where: { nom_pouvoir } });
   return Boolean(power);
 }
 
-export async function powerDeletedExists(nom_power) {
-  const power = await Power.scope("deleted").findOne({ where: { nom_power } });
+export async function powerDeletedExists(nom_pouvoir) {
+  const power = await Power.scope("deleted").findOne({ where: { nom_pouvoir } });
   return Boolean(power);
 }
 
@@ -68,7 +68,7 @@ export async function getAllPowersWithDeleted() {
   await Power.scope("withDeleted").findAll();
 }
 
-export async function getAllPowersDeleted() {
+export async function getAllDeletedPowers() {
   await Power.scope("deleted").findAll();
 }
 
