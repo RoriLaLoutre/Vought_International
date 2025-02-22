@@ -43,6 +43,5 @@ const Mission = sequelize.define("missions", {
   }
 });
 
-Mission.belongsToMany(Hero, { through: HeroMission, foreignKey: "id_mission", as: "heroes" });
 
 export default Mission;
