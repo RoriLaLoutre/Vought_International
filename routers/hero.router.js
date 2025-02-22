@@ -1,7 +1,9 @@
 import express from "express";
-import { HeroController , MissionController } from "../controllers/index.controller.js";
+import { HeroController , MissionController,PowerController } from "../controllers/index.controller.js";
 
 const router = express.Router()
+
+router.get("/powers", PowerController.getAllPowers);
 router.get("/mission", MissionController.getAllMissions); // Liste des missions
 
 router.get("/", HeroController.getAllHeroes);
