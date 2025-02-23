@@ -1,7 +1,5 @@
 import sequelize from "../config/database.js";
 import { DataTypes } from "sequelize";
-import Hero from "./hero.model.js";
-import HeroMission from "./heroMission.model.js";
 
 const Mission = sequelize.define("missions", {
   id_mission: {

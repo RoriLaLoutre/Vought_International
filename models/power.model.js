@@ -1,14 +1,12 @@
 import sequelize from "../config/database.js";
 import { DataTypes } from "sequelize";
-import Hero from "./hero.model.js";
-import HeroPower from "./heroPower.model.js";
 
 
-const Power = sequelize.define("powers", { id_pouvoir: {
-  type: DataTypes.UUIDV4,
-  primaryKey: true,
+const Power = sequelize.define("powers", { 
+  id_pouvoir: {
   type: DataTypes.INTEGER,
-  autoIncrement: true
+  autoIncrement: true,
+  primaryKey: true,
 },
 nom_pouvoir: {
   type: DataTypes.STRING,

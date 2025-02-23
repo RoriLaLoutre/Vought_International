@@ -1,5 +1,4 @@
 import { MissionService } from "../services/index.service.js";
-import { HeroError } from "../errors/index.error.js";
 
 export async function getAllMissions(req, res , next) {
   try {

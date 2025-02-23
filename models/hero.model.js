@@ -5,10 +5,9 @@ import Mission from "./mission.model.js";
 import HeroPower from "./heroPower.model.js";
 import HeroMission from "./heroMission.model.js";
 
-const Hero = sequelize.define("heroes", { id_hero: {
-  // type: DataTypes.UUIDV4,
+const Hero = sequelize.define("heroes", { 
+  id_hero: {
   primaryKey: true,
-  // defaultValue: DataTypes.UUIDV4,
   type: DataTypes.INTEGER,
   autoIncrement: true
 },
