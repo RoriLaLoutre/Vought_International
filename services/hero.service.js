@@ -1,9 +1,7 @@
-import { HeroRepository } from "../repositories/index.repository.js";
+import { HeroRepository , PowerRepository , MissionRepository } from "../repositories/index.repository.js";
 import { HeroError } from "../errors/index.error.js";
+import { HeroPowerRepository, HeroMissionRepository } from "../repositories/index.repository.js";
 
-// Règles métier
-  // 1. Confidentialité des héros
-  // 2. softDelete
 
 export async function getHeroById(id) {
   const hero = await HeroRepository.getHeroById(id);
@@ -87,4 +85,47 @@ export async function restoreHero(id){
     throw new HeroError.ConflictError("Le héros existe déja")
   }
   return restoredHero
+}
+
+// methodes pour les tables liées
+
+export async function addPowerToHero(heroId, powerId) {
+    const hero = await HeroRepository.getHeroById(heroId);
+    if (!hero) throw new HeroError.NotFoundError("Le héros n'existe pas.");
+
+    const power = await PowerRepository.getPowerById(powerId);
+    if (!power) throw new HeroError.NotFoundError("Le pouvoir n'existe pas.");
+
+    await HeroPowerRepository.addHeroPower(heroId, powerId);
+
+    return { message: "Pouvoir ajouté au héros avec succès !" };
+}
+
+export async function addMissionToHero(heroId, missionId) {
+    const hero = await HeroRepository.getHeroById(heroId);
+    if (!hero) throw new HeroError.NotFoundError("Le héros n'existe pas.");
+
+    const mission = await MissionRepository.getMissionById(missionId);
+    if (!mission) throw new HeroError.NotFoundError("La mission n'existe pas.");
+
+    await HeroMissionRepository.addHeroMission(heroId, missionId);
+
+    return { message: "Mission ajoutée au héros avec succès !" };
+}
+
+
+export async function getHeroPowers(heroId) {
+  const hero = await HeroRepository.getHeroById(heroId);
+  if (!hero) throw new HeroError.NotFoundError("Le héros n'existe pas.");
+
+  const powers = await HeroPowerRepository.getHeroPowers(heroId);
+  return powers.length > 0 ? powers : { message: "Ce héros n'a aucun pouvoir." };
+}
+
+export async function getHeroMissions(heroId) {
+  const hero = await HeroRepository.getHeroById(heroId);
+  if (!hero) throw new HeroError.NotFoundError("Le héros n'existe pas.");
+
+  const missions = await HeroMissionRepository.getHeroMissions(heroId);
+  return missions.length > 0 ? missions : { message: "Ce héros n'a aucune mission." };
 }

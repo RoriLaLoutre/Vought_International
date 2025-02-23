@@ -33,7 +33,8 @@ export async function getAllMissionsBySuccess(is_a_success) {
 }
 
 export async function getAllMissions() {
-    return await Mission.findAll();
+    const missions = await Mission.findAll();
+    return missions
 }
 
 export async function getAllMissionsWithDeleted() {
@@ -73,9 +74,3 @@ export async function missionDeletedExists(id) {
 export async function getAllMissionsDeleted() {
     return await Mission.scope("deleted").findAll();
 }
-
-
-// LINK
-
-// addHeroToMission(id_hero , id_mission)
-// deleteHeroFromMission(id_hero , id_mission)

@@ -1,5 +1,4 @@
 import { HeroService } from "../services/index.service.js";
-import { HeroError } from "../errors/index.error.js";
 
 export async function getAllHeroes(req, res , next) {
   try {
@@ -67,5 +66,49 @@ export async function restoreHero(req, res , next) {
     res.json(restoredHero);
   } catch (error) {
     next(error)
+  }
+}
+
+
+export async function addPowerToHero(req, res, next) {
+    try {
+        const { heroId, powerId } = req.body;
+        const result = await HeroService.addPowerToHero(heroId, powerId);
+        res.json(result);
+    } catch (error) {
+        next(error);
+    }
+}
+
+
+
+export async function addMissionToHero(req, res, next) {
+    try {
+        const { heroId, missionId } = req.body;
+        const result = await HeroService.addMissionToHero(heroId, missionId);
+        res.json(result);
+    } catch (error) {
+        next(error);
+    }
+}
+
+
+export async function getHeroPowers(req, res, next) {
+  try {
+      const heroId = req.params.id;
+      const powers = await HeroService.getHeroPowers(heroId);
+      res.json(powers);
+  } catch (error) {
+      next(error);
+  }
+}
+
+export async function getHeroMissions(req, res, next) {
+  try {
+      const heroId = req.params.id;
+      const missions = await HeroService.getHeroMissions(heroId);
+      res.json(missions);
+  } catch (error) {
+      next(error);
   }
 }

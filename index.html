@@ -15,6 +15,7 @@
 <body>
 
     <h1>Ajouter un Héros, une Mission ou un Pouvoir</h1>
+    <a href="index2.html">Sinon cliquez ici pour ajouter des pouvoirs ou des missions aux heros</a>
 
     <label for="type">Choisir un type :</label>
     <select id="type">
@@ -27,22 +28,22 @@
         <!-- Champs pour Héros -->
         <div id="hero-fields">
             <label for="alias">Alias :</label>
-            <input type="text" id="alias" name="alias" required>
+            <input type="text" id="alias" name="alias" >
             
             <label for="identity">Identité :</label>
-            <input type="text" id="identity" name="identity" required>
+            <input type="text" id="identity" name="identity" >
 
             <label for="powerDate">Date de pouvoir :</label>
-            <input type="date" id="powerDate" name="powerDate" required>
+            <input type="date" id="powerDate" name="powerDate" >
         </div>
 
         <!-- Champs pour Mission -->
         <div id="mission-fields" style="display: none;">
             <label for="nom_mission">Nom de la mission :</label>
-            <input type="text" id="nom_mission" name="nom_mission" required>
+            <input type="text" id="nom_mission" name="nom_mission" >
             
             <label for="description">Description :</label>
-            <textarea id="description" name="description" required></textarea>
+            <textarea id="description" name="description" ></textarea>
 
             <label for="status">Statut :</label>
             <select id="status" name="status">
@@ -60,10 +61,10 @@
         <!-- Champs pour Pouvoir -->
         <div id="power-fields" style="display: none;">
             <label for="nom_pouvoir">Nom du pouvoir :</label>
-            <input type="text" id="nom_pouvoir" name="nom_pouvoir" required>
+            <input type="text" id="nom_pouvoir" name="nom_pouvoir" >
 
             <label for="description_pouvoir">Description :</label>
-            <textarea id="description_pouvoir" name="description_pouvoir" required></textarea>
+            <textarea id="description_pouvoir" name="description_pouvoir" ></textarea>
         </div>
 
         <button type="submit">Créer</button>
@@ -114,10 +115,10 @@
                 });
 
                 if (response.ok) {
-                    alert(type.charAt(0).toUpperCase() + type.slice(1) + " ajouté avec succès !");
+                    alert("Succes de l'ajout !");
                     document.getElementById("form").reset();
                 } else {
-                    alert("Erreur lors de l'ajout !");
+                    alert("Erreur : " + result.error);
                 }
             } catch (error) {
                 alert("Erreur de connexion au serveur.");
