@@ -5,22 +5,23 @@ import HeroPower from "./heroPower.model.js";
 import HeroMission from "./heroMission.model.js";
 
 const associate = () => {
-  Hero.belongsToMany(Power, {
-    through: HeroPower,
-    foreignKey: "id_hero",
-    as: "powers",
-  });
   
   Hero.belongsToMany(Mission, {
     through: HeroMission,
     foreignKey: "id_hero",
-    as: "missions",
+    as: "missions"
   });
 
   Mission.belongsToMany(Hero, {
     through: HeroMission,
     foreignKey: "id_mission",
-    as: "heroes",
+    as: "heroes"
+  });
+
+  Hero.belongsToMany(Power, {
+    through: HeroPower,
+    foreignKey: "id_hero",
+    as: "powers",
   });
 
   Power.belongsToMany(Hero, {
