@@ -74,9 +74,6 @@ export async function getAllMissionsBySuccess(is_a_success) {
 
 export async function getAllMissions() {
   const missions = await MissionRepository.getAllMissions();
-  if (!missions || missions.length === 0) {
-    throw new Error(`Aucune mission trouvée`); // fait
-  }
   const formattedMissions = missions.map(mission => {
     return {
       id: mission.id,

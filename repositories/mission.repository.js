@@ -33,8 +33,7 @@ export async function getAllMissionsBySuccess(is_a_success) {
 }
 
 export async function getAllMissions() {
-    const missions = await Mission.findAll();
-    return missions
+    return await Mission.findAll();
 }
 
 export async function getAllMissionsWithDeleted() {
