@@ -1,5 +1,4 @@
 import { PowerService } from "../services/index.service.js";
-import { PowerError } from "../errors/index.error.js";
 
 export async function getAllPowers(req, res , next) {
   try {
